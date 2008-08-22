@@ -24,6 +24,8 @@ Trailing slashes are stripped and duplicate names are not added."
 (autoload 'git-blame-mode "git-blame" "Minor mode for incremental blame for Git." t)
 (require 'ido)
 (ido-mode t)
+(require 'linum)
+(global-linum-mode 1)
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
@@ -61,10 +63,10 @@ Trailing slashes are stripped and duplicate names are not added."
 (setq inferior-lisp-program
       (let* ((java-path "java")               ; Path to java implementation
              (java-options "")                ; Extra command-line options to java.
-             (clojure-path "~/src/clojure/")  ; Base directory to Clojure.
+             (clojure-path "/usr/local/clojure/target/")  ; Base directory to Clojure.
              (class-path-delimiter ";")       ; The character between  elements of your classpath.
              (class-path (mapconcat (lambda (s) s)
-                                    (list (concat clojure-path "clojure.jar"))
+                                    (list (concat clojure-path "clojure-lang-1.0-SNAPSHOT.jar"))
                                     class-path-delimiter)))
         (concat java-path
                 " " java-options
