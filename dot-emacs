@@ -10,6 +10,7 @@ Trailing slashes are stripped and duplicate names are not added."
 (add-to-load-path "~/.emacs.d")
 (add-to-load-path "~/.emacs.d/emacs-rails")
 (add-to-load-path "~/.emacs.d/clojure-mode")
+(add-to-load-path "~/.emacs.d/color-theme")
 
 (autoload 'js2-mode "js2" nil t)
 
@@ -26,6 +27,7 @@ Trailing slashes are stripped and duplicate names are not added."
 (ido-mode t)
 (require 'linum)
 (global-linum-mode 1)
+(require 'color-theme)
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
@@ -53,6 +55,8 @@ Trailing slashes are stripped and duplicate names are not added."
 (global-set-key [(hyper w)] (lambda () (interactive) (kill-buffer (current-buffer))))
 (global-set-key [(hyper right)] 'other-frame)
 (global-set-key [(hyper left)] 'other-frame)
+(global-set-key "\C-c\C-i" 'color-theme-initialize)
+(global-set-key "\C-c\C-tv" 'color-theme-vivid-chalk)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -88,6 +92,34 @@ Trailing slashes are stripped and duplicate names are not added."
           '(lambda ()
              (define-key clojure-mode-map "\C-c\C-e" 'lisp-eval-last-sexp)
              (define-key clojure-mode-map "\C-x\C-e" 'lisp-eval-last-sexp)))
+
+(autoload 'run-ruby "inf-ruby"
+  "Run an inferior Ruby process")
+(autoload 'inf-ruby-keys "inf-ruby"
+  "Set local key defs for inf-ruby in ruby-mode")
+(add-hook 'ruby-mode-hook
+          '(lambda ()
+             (inf-ruby-keys)
+             ))
+
+(setq inferior-lisp-program "/opt/local/bin/clisp")
+(add-to-list 'load-path "/opt/local/share/emacs/site-lisp/slime")
+(require 'slime)
+(slime-setup)
+(eval-after-load "slime"
+  '(slime-setup '(slime-fancy slime-banner)))
+
+(defun toggle-fullscreen ()
+  (interactive)
+  (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen)
+                                           nil
+                                           'fullboth)))
+
+(global-set-key [(meta return)] 'toggle-fullscreen)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(setq scroll-conservatively 5)
+(mouse-avoidance-mode 'jump)
+(setq gc-cons-threshold 50000000)
 
 
 (custom-set-variables
