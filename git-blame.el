@@ -1,8 +1,8 @@
 ;;; git-blame.el --- Minor mode for incremental blame for Git  -*- coding: utf-8 -*-
 ;;
-;; Copyright (C) 2007  David KÃƒÂ¥gedal
+;; Copyright (C) 2007  David Kågedal
 ;;
-;; Authors:    David KÃƒÂ¥gedal <davidk@lysator.liu.se>
+;; Authors:    David Kågedal <davidk@lysator.liu.se>
 ;; Created:    31 Jan 2007
 ;; Message-ID: <87iren2vqx.fsf@morpheus.local>
 ;; License:    GPL
@@ -381,7 +381,7 @@ See also function `git-blame-mode'."
                   "log" "-1"
 		  (concat "--pretty=" git-blame-log-oneline-format)
                   hash)
-    (buffer-substring (point-min) (1- (point-max)))))
+    (buffer-substring (point-min) (point-max))))
 
 (defvar git-blame-last-identification nil)
 (make-variable-buffer-local 'git-blame-last-identification)
