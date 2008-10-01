@@ -75,7 +75,7 @@
                  (:mailer (rails-core:mailer-file mailer))
                  (:controller (rails-core:controller-file-by-model model))
                  (:fixture (rails-core:fixture-file model))
-                 (:unit-test (rails-core:unit-test-file item))
+                 (:unit-test (rails-core:unit-model-test-file item))
                  (:model (rails-core:model-file model))
                  (:migration (rails-core:migration-file-by-model model)))))
     (if item
