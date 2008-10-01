@@ -157,10 +157,10 @@ If the action is nil, return all views for the controller."
          (mailer (rails-core:current-mailer))
          (item (case type
                  (:helper (rails-core:helper-file controller))
-                 (:functional-test (rails-core:functional-test-file controller))
+                 (:functional-test (rails-core:functional-controller-test-file controller))
                  (:controller (rails-core:controller-file controller))
                  (:model (rails-core:model-file model))
-                 (:unit-test (rails-core:unit-test-file mailer))
+                 (:unit-test (rails-core:unit-controller-test-file controller))
                  (:migration (rails-core:migration-file-by-model model)))))
     (if item
         (let ((file (rails-core:file item)))
@@ -197,6 +197,8 @@ If the action is nil, return all views for the controller."
         (add-to-list 'item (cons "Helper" :helper)))
       (unless (eq type :functional-test)
         (add-to-list 'item (cons "Functional Test" :functional-test)))
+      (unless (eq type :unit-test)
+        (add-to-list 'item (cons "Unit Test" :unit-test)))
       (unless (eq type :controller)
         (add-to-list 'item (cons "Controller" :controller))))
     (when mailer

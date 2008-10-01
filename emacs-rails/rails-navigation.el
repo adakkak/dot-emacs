@@ -87,6 +87,22 @@
    "Go to functional test."
    'rails-core:functional-test-file))
 
+(defun rails-nav:goto-functional-controller-tests ()
+  "Go to functional controller tests."
+  (interactive)
+  (rails-nav:goto-file-with-menu-from-list
+   (rails-core:functional-controller-tests)
+   "Go to functional controller test."
+   'rails-core:functional-controller-test-file))
+
+(defun rails-nav:goto-functional-model-tests ()
+  "Go to functional model tests."
+  (interactive)
+  (rails-nav:goto-file-with-menu-from-list
+   (rails-core:functional-model-tests)
+   "Go to functional controller test."
+   'rails-core:functional-model-test-file))
+
 (defun rails-nav:goto-unit-tests ()
   "Go to functional tests."
   (interactive)
@@ -94,6 +110,22 @@
    (rails-core:unit-tests)
    "Go to unit test."
    'rails-core:unit-test-file))
+
+(defun rails-nav:goto-unit-controller-tests ()
+  "Go to functional tests."
+  (interactive)
+  (rails-nav:goto-file-with-menu-from-list
+   (rails-core:unit-controller-tests)
+   "Go to unit test."
+   'rails-core:unit-controller-test-file))
+
+(defun rails-nav:goto-unit-model-tests ()
+  "Go to functional tests."
+  (interactive)
+  (rails-nav:goto-file-with-menu-from-list
+   (rails-core:unit-model-tests)
+   "Go to unit test."
+   'rails-core:unit-model-test-file))
 
 (defun rails-nav:goto-observers ()
   "Go to observers."

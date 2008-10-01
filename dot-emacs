@@ -35,7 +35,7 @@ Trailing slashes are stripped and duplicate names are not added."
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.erl\\'" . erlang-mode))
 (add-to-list 'auto-mode-alist '("\\.hrl\\'" . erlang-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.html.erb\\'" . html-mode))
 
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'hyper)
@@ -116,12 +116,8 @@ Trailing slashes are stripped and duplicate names are not added."
   (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen)
                                            nil
                                            'fullboth)))
-
-(defun run-git (command)
-  (interactive "sCommand: ")
-  (print (concat "Runing git " command)))
-
 (global-set-key [(meta return)] 'toggle-fullscreen)
+
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (setq scroll-conservatively 5)
 (mouse-avoidance-mode 'jump)

@@ -34,7 +34,11 @@
     "app/models"
     "app/helpers"
     "test/unit"
+    "test/unit/controllers"
+    "test/unit/models"
     "test/functional"
+    "test/functional/controllers"
+    "test/functional/models"
     "test/fixtures")
   "Directories with Rails classes")
 
@@ -256,16 +260,37 @@ CONTROLLER."
                                         (rails-core:file-by-class controller t))))))
 
 (defun rails-core:functional-test-file (controller)
-  "Return the functional test file name for the controller named
-CONTROLLER."
+  "Return the functional test file name for the controller named CONTROLLER."
   (when controller
     (format "test/functional/%s_test.rb"
             (rails-core:file-by-class (rails-core:long-controller-name controller) t))))
+
+(defun rails-core:functional-controller-test-file (controller)
+  "Return the functional test file name for the controller named CONTROLLER."
+  (when controller
+    (format "test/functional/controllers/%s_test.rb"
+            (rails-core:file-by-class (rails-core:long-controller-name controller) t))))
+
+(defun rails-core:functional-model-test-file (model)
+  "Return the functional test file name for the model named MODEL."
+  (when model
+    (format "test/functional/models/%s_test.rb" (rails-core:file-by-class model t))))
 
 (defun rails-core:unit-test-file (model)
   "Return the unit test file name for the model named MODEL."
   (when model
     (format "test/unit/%s_test.rb" (rails-core:file-by-class model t))))
+
+(defun rails-core:unit-model-test-file (model)
+  "Return the unit test file name for the model named MODEL."
+  (when model
+    (format "test/unit/models/%s_test.rb" (rails-core:file-by-class model t))))
+
+(defun rails-core:unit-controller-test-file (controller)
+  "Return the unit test file name for the controller named CONTROLLER."
+  (when controller
+    (format "test/unit/controllers/%s_test.rb" 
+            (rails-core:file-by-class (rails-core:long-controller-name controller) t))))
 
 (defun rails-core:unit-test-exist-p (model)
   "Return the unit test file name for the model named MODEL."
@@ -348,6 +373,22 @@ suffix if CUT-CONTOLLER-SUFFIX is non nil."
                        "ControllerTest"))
    (find-recursive-files "\\.rb$" (rails-core:file "test/functional/"))))
 
+(defun rails-core:functional-controller-tests ()
+  "Return a list of Rails functional controller tests."
+  (mapcar
+   #'(lambda(it)
+       (remove-postfix (rails-core:class-by-file it)
+                       "ControllerTest"))
+   (find-recursive-files "\\.rb$" (rails-core:file "test/functional/controllers/"))))
+
+(defun rails-core:functional-model-tests ()
+  "Return a list of Rails functional model tests."
+  (mapcar
+   #'(lambda(it)
+       (remove-postfix (rails-core:class-by-file it)
+                       "ControllerTest"))
+   (find-recursive-files "\\.rb$" (rails-core:file "test/functional/models/"))))
+
 (defun rails-core:models ()
   "Return a list of Rails models."
   (mapcar
@@ -364,6 +405,22 @@ suffix if CUT-CONTOLLER-SUFFIX is non nil."
        (remove-postfix (rails-core:class-by-file it)
                        "Test"))
    (find-recursive-files "\\.rb$" (rails-core:file "test/unit/"))))
+
+(defun rails-core:unit-controller-tests ()
+  "Return a list of Rails unit controller tests."
+  (mapcar
+   #'(lambda(it)
+       (remove-postfix (rails-core:class-by-file it)
+                       "Test"))
+   (find-recursive-files "\\.rb$" (rails-core:file "test/unit/controllers/"))))
+
+(defun rails-core:unit-model-tests ()
+  "Return a list of Rails unit model tests."
+  (mapcar
+   #'(lambda(it)
+       (remove-postfix (rails-core:class-by-file it)
+                       "Test"))
+   (find-recursive-files "\\.rb$" (rails-core:file "test/unit/models/"))))
 
 (defun rails-core:observers ()
   "Return a list of Rails observers."
