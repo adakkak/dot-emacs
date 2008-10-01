@@ -117,6 +117,10 @@ Trailing slashes are stripped and duplicate names are not added."
                                            nil
                                            'fullboth)))
 
+(defun run-git (command)
+  (interactive "sCommand: ")
+  (print (concat "Runing git " command)))
+
 (global-set-key [(meta return)] 'toggle-fullscreen)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (setq scroll-conservatively 5)

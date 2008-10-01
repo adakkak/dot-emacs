@@ -6,8 +6,8 @@
 ;;          Rezikov Peter <crazypit13 (at) gmail.com>
 
 ;; Keywords: ruby rails languages oop
-;; $URL: svn+ssh://rubyforge/var/svn/emacs-rails/trunk/rails.el $
-;; $Id: rails.el 193 2007-05-05 18:37:00Z dimaexe $
+;; $URL$
+;; $Id$
 
 ;;; License
 
@@ -44,7 +44,6 @@
 (require 'etags)
 (require 'find-recursive)
 
-(require 'untabify-file)
 (require 'predictive-prog-mode)
 
 (require 'inflections)
@@ -68,6 +67,7 @@
 (require 'rails-model-layout)
 (require 'rails-controller-layout)
 (require 'rails-features)
+(require 'rails-spec)
 
 
 ;;;;;;;;;; Variable definition ;;;;;;;;;;
@@ -145,11 +145,22 @@ Emacs w3m browser."
   :group 'rails
   :type 'string)
 
-(defvar rails-version "0.5.99.1")
-(defvar rails-templates-list '("erb" "rhtml" "rxml" "rjs" "haml" "liquid"))
+(defcustom rails-enable-ruby-electric t
+  "Indicates whether ruby electric minor mode should be enabled by default for ruby files"
+  :group 'rails
+  :type 'boolean)
+
+(defcustom rails-number-of-lines-shown-when-opening-log-file 130
+  "Specifies how many lines to show initially when opening a log file"
+  :group 'rails
+  :type 'integer)
+
+(defvar rails-version "0.5.99.6")
+(defvar rails-templates-list '("html.erb" "erb" "js.rjs" "builder" "rhtml" "rxml" "rjs" "haml" "liquid" "mab"))
 (defvar rails-use-another-define-key nil)
 (defvar rails-primary-switch-func nil)
 (defvar rails-secondary-switch-func nil)
+(defvar rails-required-lisp-eval-depth 1000) ; Specifies the minimum required value of max-lisp-eval-depth for rails mode to work
 
 (defvar rails-directory<-->types
   '((:controller       "app/controllers/")
@@ -184,10 +195,12 @@ Emacs w3m browser."
   (or (null window-system) rails-always-use-text-menus))
 
 ;;;;;;;; hack ;;;;
-(defun rails-svn-status-into-root ()
+(defvar rails-vc:command 'git-status)
+
+(defun rails-vc:status-into-root ()
   (interactive)
   (rails-project:with-root (root)
-                           (svn-status root)))
+                           (funcall rails-vc:command root)))
 
 ;; helper functions/macros
 (defun rails-search-doc (&optional item)
@@ -292,25 +305,25 @@ it in case it's still empty for the project."
   (rails-project:with-root
    (root)
    (unless (or (file-exists-p (rails-core:file "doc/api/index.html"))
-         (not (yes-or-no-p (concat "This project has no API documentation. "
-           "Would you like to configure it now? "))))
+               (not (yes-or-no-p (concat "This project has no API documentation. "
+                                         "Would you like to configure it now? "))))
      (let (clobber-gems)
        (message "This may take a while. Please wait...")
        (unless (file-exists-p (rails-core:file "vendor/rails"))
-   (setq clobber-gems t)
-   (message "Freezing gems...")
-   (shell-command-to-string "rake rails:freeze:gems"))
+         (setq clobber-gems t)
+         (message "Freezing gems...")
+         (shell-command-to-string "rake rails:freeze:gems"))
        ;; Hack to allow generation of the documentation for Rails 1.0 and 1.1
        ;; See http://dev.rubyonrails.org/ticket/4459
        (unless (file-exists-p (rails-core:file "vendor/rails/activesupport/README"))
-   (write-string-to-file (rails-core:file "vendor/rails/activesupport/README")
-             "Placeholder"))
+         (write-string-to-file (rails-core:file "vendor/rails/activesupport/README")
+                               "Placeholder"))
        (message "Generating documentation...")
        (shell-command-to-string "rake doc:rails")
        (if clobber-gems
-     (progn
-       (message "Unfreezing gems...")
-       (shell-command-to-string "rake rails:unfreeze")))
+           (progn
+             (message "Unfreezing gems...")
+             (shell-command-to-string "rake rails:unfreeze")))
        (message "Done...")))
    (if (file-exists-p (rails-core:file "doc/api/index.html"))
        (setq rails-api-root (rails-core:file "doc/api")))))
@@ -394,7 +407,8 @@ necessary."
           (lambda()
             (require 'rails-ruby)
             (require 'ruby-electric)
-            (ruby-electric-mode t)
+            (ruby-electric-mode (or rails-enable-ruby-electric -1))
+            (ruby-hs-minor-mode t)
             (imenu-add-to-menubar "IMENU")
             (modify-syntax-entry ?! "w" (syntax-table))
             (modify-syntax-entry ?: "w" (syntax-table))
@@ -402,7 +416,7 @@ necessary."
             (local-set-key (kbd "C-.") 'complete-tag)
             (local-set-key (if rails-use-another-define-key
                                (kbd "TAB") (kbd "<tab>"))
-                           'indent-or-complete)
+                           'indent-and-complete)
             (local-set-key (rails-key "f") '(lambda()
                                               (interactive)
                                               (mouse-major-mode-menu (rails-core:menu-position))))
@@ -422,7 +436,7 @@ necessary."
              (progn
                (local-set-key (if rails-use-another-define-key
                                   (kbd "TAB") (kbd "<tab>"))
-                              'indent-or-complete)
+                              'indent-and-complete)
                (rails-minor-mode t)
                (rails-apply-for-buffer-type)))))
 
@@ -436,17 +450,24 @@ necessary."
 
 (autoload 'haml-mode "haml-mode" "" t)
 
-(setq auto-mode-alist  (cons '("\\.rb$"     . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.rake$"   . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("Rakefile$"  . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.haml$"   . haml-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.rjs$"    . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.rxml$"   . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.rhtml$"  . html-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.rb$"      . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.rake$"    . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.mab$"     . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("Rakefile$"   . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.haml$"    . haml-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.rjs$"     . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.rxml$"    . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.builder$" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.rjs$"     . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.rhtml$"   . html-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.erb$"     . html-mode) auto-mode-alist))
 
 (modify-coding-system-alist 'file "\\.rb$"     'utf-8)
 (modify-coding-system-alist 'file "\\.rake$"   'utf-8)
 (modify-coding-system-alist 'file "Rakefile$" 'utf-8)
 (modify-coding-system-alist 'file (rails-core:regex-for-match-view) 'utf-8)
+
+;; Some navigation breaks if max-lisp-eval-depth is not high enough, up it if too low
+(setq max-lisp-eval-depth (max max-lisp-eval-depth rails-required-lisp-eval-depth))
 
 (provide 'rails)
