@@ -118,6 +118,11 @@ Trailing slashes are stripped and duplicate names are not added."
                                            'fullboth)))
 (global-set-key [(meta return)] 'toggle-fullscreen)
 
+(defun copy-line (n)
+  (interactive "p")
+  (kill-ring-save (line-beginning-position) (line-beginning-position (1+ n))))
+(global-set-key "\C-cl" 'copy-line)
+
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (setq scroll-conservatively 5)
 (mouse-avoidance-mode 'jump)
