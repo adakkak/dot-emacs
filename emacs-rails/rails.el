@@ -459,8 +459,9 @@ necessary."
 (setq auto-mode-alist  (cons '("\\.rxml$"    . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.builder$" . ruby-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.rjs$"     . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.rhtml$"   . html-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.erb$"     . html-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.rhtml$"   . rhtml-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.html.erb$"   . rhtml-mode) auto-mode-alist))
+(setq auto-mode-alist  (cons '("\\.erb$"     . rhtml-mode) auto-mode-alist))
 
 (modify-coding-system-alist 'file "\\.rb$"     'utf-8)
 (modify-coding-system-alist 'file "\\.rake$"   'utf-8)

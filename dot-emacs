@@ -11,6 +11,8 @@ Trailing slashes are stripped and duplicate names are not added."
 (add-to-load-path "~/.emacs.d/emacs-rails")
 (add-to-load-path "~/.emacs.d/clojure-mode")
 (add-to-load-path "~/.emacs.d/color-theme")
+(add-to-load-path "~/.emacs.d/rhtml")
+(add-to-load-path "~/.emacs.d/nxml")
 
 (autoload 'js2-mode "js2" nil t)
 
@@ -28,6 +30,8 @@ Trailing slashes are stripped and duplicate names are not added."
 (require 'linum)
 (global-linum-mode 1)
 (require 'color-theme)
+(require 'nxml-mode)
+(require 'rhtml-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
@@ -35,7 +39,7 @@ Trailing slashes are stripped and duplicate names are not added."
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.erl\\'" . erlang-mode))
 (add-to-list 'auto-mode-alist '("\\.hrl\\'" . erlang-mode))
-(add-to-list 'auto-mode-alist '("\\.html.erb\\'" . html-mode))
+;;(add-to-list 'auto-mode-alist '("\\.html.erb\\'" . html-mode))
 
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'hyper)
