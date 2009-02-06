@@ -84,7 +84,7 @@ Trailing slashes are stripped and duplicate names are not added."
                 " clojure.lang.Repl")))
 
 ;; Require clojure-mode to load and associate it to all .clj files.
-(setq load-path (cons "insert path to folder with clojure-mode stuff" load-path))
+(setq load-path (cons "~/opt/clojure-mode" load-path))
 (require 'clojure-mode)
 (setq auto-mode-alist
       (cons '("\\.clj$" . clojure-mode)
@@ -227,3 +227,9 @@ Trailing slashes are stripped and duplicate names are not added."
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/plugins/yasnippet/snippets")
+
+(add-to-list 'load-path "~/.emacs.d/anything" load-path)
+(require 'anything)
+(require 'anything-config)
+
+(setq visible-bell t)

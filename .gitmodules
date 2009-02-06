@@ -1,3 +1,6 @@
 [submodule "shell-fm"]
 	path = shell-fm
 	url = shell-fm
+[submodule "anything"]
+	path = anything
+	url = git://repo.or.cz/anything-config.git
