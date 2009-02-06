@@ -245,4 +245,8 @@ Trailing slashes are stripped and duplicate names are not added."
 (semantic-load-enable-guady-code-helpers)
 
 
+;; tell emacs that bullets are the start of paragraphs
+;; so that wrapping with M-q works
+(setq paragraph-start "\\*\\|$" 
+          paragraph-separate "$")
 (setq visible-bell t)
