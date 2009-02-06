@@ -1,0 +1,5 @@
+# This was cloned from a TextMate bundle for yasnippet.
+# --
+${1:name} := Object clone do(
+	$0
+)

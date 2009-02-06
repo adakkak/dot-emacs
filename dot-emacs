@@ -184,11 +184,6 @@ Trailing slashes are stripped and duplicate names are not added."
 	    (dolist (spec distel-shell-keys)
 	      (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
 
-(add-to-list 'load-path "~/.emacs.d/plugins")
-(require 'yasnippet) ;; not yasnippet-bundle
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/plugins/yasnippet/snippets")
-
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -227,3 +222,8 @@ Trailing slashes are stripped and duplicate names are not added."
  '(vhdl-speedbar-package-selected-face ((((class color) (background dark)) (:underline t :foreground "black"))))
  '(widget-field ((((class grayscale color) (background light)) (:background "DarkBlue")))))
 (global-font-lock-mode 1)
+
+(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet) ;; not yasnippet-bundle
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/plugins/yasnippet/snippets")

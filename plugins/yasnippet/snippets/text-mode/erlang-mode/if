@@ -1,0 +1,6 @@
+# This was cloned from a TextMate bundle for yasnippet.
+# --
+if
+	${1:guard} ->
+		${2:body}
+end

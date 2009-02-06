@@ -1,0 +1,3 @@
+# This was cloned from a TextMate bundle for yasnippet.
+# --
+-define (${1:macro}${2: (${3:param})}, ${4:body}).
