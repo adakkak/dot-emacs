@@ -4,3 +4,6 @@
 [submodule "anything"]
 	path = anything
 	url = git://repo.or.cz/anything-config.git
+[submodule "org-mode"]
+	path = org-mode
+	url = git://repo.or.cz/org-mode.git

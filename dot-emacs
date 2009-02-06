@@ -232,4 +232,16 @@ Trailing slashes are stripped and duplicate names are not added."
 (require 'anything)
 (require 'anything-config)
 
+(add-to-list 'load-path "~/.emacs.d/org-mode" load-path)
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(global-font-lock-mode 1)                     ; for all buffers
+(add-hook 'org-mode-hook 'turn-on-font-lock)  ; Org buffers only
+
+
+
+
 (setq visible-bell t)
