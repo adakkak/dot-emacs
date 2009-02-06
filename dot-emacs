@@ -241,7 +241,8 @@ Trailing slashes are stripped and duplicate names are not added."
 (global-font-lock-mode 1)                     ; for all buffers
 (add-hook 'org-mode-hook 'turn-on-font-lock)  ; Org buffers only
 
-
+(load-file "~/.emacs.d/cedet/common/cedet.el")
+(semantic-load-enable-guady-code-helpers)
 
 
 (setq visible-bell t)
