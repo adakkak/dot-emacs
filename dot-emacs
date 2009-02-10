@@ -35,7 +35,7 @@ Trailing slashes are stripped and duplicate names are not added."
 (require 'rhtml-mode)
 (require 'cc-mode)
 
-(add-to-list 'auto-mode-alist '("\\.c$" . cc-mode))
+(add-to-list 'auto-mode-alist '("\\.c$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
