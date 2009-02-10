@@ -197,5 +197,19 @@ Trailing slashes are stripped and duplicate names are not added."
 (load-file "~/.emacs.d/cedet/common/cedet.el")
 (semantic-load-enable-guady-code-helpers)
 
+(autoload 'markdown-mode "markdown-mode.el"
+   "Major mode for editing Markdown files" t)
+(setq auto-mode-alist
+   (cons '("\\.markdown" . markdown-mode) auto-mode-alist))
 
+
+;; tell emacs that bullets are the start of paragraphs
+;; so that wrapping with M-q works
+(setq paragraph-start "\\*\\|$" 
+          paragraph-separate "$")
+
+;; start ispell in current directory
+(setq ispell-process-directory (expand-file-name "~/"))
+
+;; disable emacs bell
 (setq visible-bell t)
