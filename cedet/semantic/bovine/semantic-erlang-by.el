@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2002, 2003 Vladimir G. Sekissov
 
-;; Author: Abdulmajed Dakkak <adakkak@cilin>
-;; Created: 2009-02-06 13:00:37-0600
+;; Author:  <adakkak@toxic>
+;; Created: 2009-02-09 18:51:47-0600
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 

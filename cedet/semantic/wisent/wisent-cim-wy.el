@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2002 David Ponce
 
-;; Author: Abdulmajed Dakkak <adakkak@cilin>
-;; Created: 2009-02-06 13:00:29-0600
+;; Author:  <adakkak@toxic>
+;; Created: 2009-02-09 18:51:17-0600
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 

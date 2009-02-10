@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2001, 2003 Eric M. Ludlam
 
-;; Author: Abdulmajed Dakkak <adakkak@cilin>
-;; Created: 2009-02-06 13:00:37-0600
+;; Author:  <adakkak@toxic>
+;; Created: 2009-02-09 18:51:46-0600
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 

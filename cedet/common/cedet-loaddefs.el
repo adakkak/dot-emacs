@@ -4,10 +4,10 @@
 
 
 ;;;### (autoloads (cedet-update-autoloads) "cedet-autogen" "cedet-autogen.el"
-;;;;;;  (18022 5416))
+;;;;;;  (18831 21608))
 ;;; Generated autoloads from cedet-autogen.el
 
-(autoload 'cedet-update-autoloads "cedet-autogen" "\
+(autoload (quote cedet-update-autoloads) "cedet-autogen" "\
 Update autoloads in file LOADDEFS from sources.
 Optional argument DIRECTORY, specifies the directory to scan for
 autoloads.  It defaults to the current directory.
@@ -20,19 +20,19 @@ exists.
 
 ;;;***
 
-;;;### (autoloads nil "cedet-edebug" "cedet-edebug.el" (18022 5416))
+;;;### (autoloads nil "cedet-edebug" "cedet-edebug.el" (18831 21608))
 ;;; Generated autoloads from cedet-edebug.el
 
-(add-hook 'edebug-setup-hook (lambda nil (require 'cedet-edebug) (defalias 'edebug-prin1-to-string 'cedet-edebug-prin1-to-string) (define-key edebug-mode-map "A" 'semantic-adebug-edebug-expr)))
+(add-hook (quote edebug-setup-hook) (lambda nil (require (quote cedet-edebug)) (defalias (quote edebug-prin1-to-string) (quote cedet-edebug-prin1-to-string)) (define-key edebug-mode-map "A" (quote semantic-adebug-edebug-expr))))
 
-(add-hook 'debugger-mode-hook (lambda nil (require 'cedet-edebug) (define-key debugger-mode-map "A" 'semantic-adebug-edebug-expr)))
+(add-hook (quote debugger-mode-hook) (lambda nil (require (quote cedet-edebug)) (define-key debugger-mode-map "A" (quote semantic-adebug-edebug-expr))))
 
 ;;;***
 
-;;;### (autoloads (define-fame-channel) "fame" "fame.el" (18022 5416))
+;;;### (autoloads (define-fame-channel) "fame" "fame.el" (18831 21608))
 ;;; Generated autoloads from fame.el
 
-(autoload 'define-fame-channel "fame" "\
+(autoload (quote define-fame-channel) "fame" "\
 Define the new message channel CHANNEL.
 CHANNEL must be a non-nil symbol.
 The optional argument DEFAULT specifies the default value of message
@@ -52,10 +52,10 @@ messages to CHANNEL.
 
 ;;;### (autoloads (inversion-upgrade-package inversion-add-to-load-path
 ;;;;;;  inversion-find-version inversion-require) "inversion" "inversion.el"
-;;;;;;  (18022 5416))
+;;;;;;  (18831 21608))
 ;;; Generated autoloads from inversion.el
 
-(autoload 'inversion-require "inversion" "\
+(autoload (quote inversion-require) "inversion" "\
 Declare that you need PACKAGE with at least VERSION.
 PACKAGE might be found in FILE.  (See `require'.)
 Throws an error if VERSION is incompatible with what is installed.
@@ -66,7 +66,7 @@ Optional argument RESERVED is saved for later use.
 
 \(fn PACKAGE VERSION &optional FILE DIRECTORY &rest RESERVED)" nil nil)
 
-(autoload 'inversion-find-version "inversion" "\
+(autoload (quote inversion-find-version) "inversion" "\
 Search for the version and incompatible version of PACKAGE.
 Does not load PACKAGE nor requires that it has been previously loaded.
 Search in the directories in `load-path' for a PACKAGE.el library.
@@ -80,7 +80,7 @@ Return nil when VERSION-STRING was not found.
 
 \(fn PACKAGE)" nil nil)
 
-(autoload 'inversion-add-to-load-path "inversion" "\
+(autoload (quote inversion-add-to-load-path) "inversion" "\
 Add the PACKAGE path to `load-path' if necessary.
 MINIMUM is the minimum version requirement of PACKAGE.
 Optional argument INSTALLDIR is the base directory where PACKAGE is
@@ -90,7 +90,7 @@ INSTALLDIR path.
 
 \(fn PACKAGE MINIMUM &optional INSTALLDIR &rest SUBDIRS)" nil nil)
 
-(autoload 'inversion-upgrade-package "inversion" "\
+(autoload (quote inversion-upgrade-package) "inversion" "\
 Try to upgrade PACKAGE in DIRECTORY is available.
 
 \(fn PACKAGE &optional DIRECTORY)" t nil)
@@ -98,10 +98,10 @@ Try to upgrade PACKAGE in DIRECTORY is available.
 ;;;***
 
 ;;;### (autoloads (pprint-function pprint pprint-to-string) "pprint"
-;;;;;;  "pprint.el" (18022 5416))
+;;;;;;  "pprint.el" (18831 21608))
 ;;; Generated autoloads from pprint.el
 
-(autoload 'pprint-to-string "pprint" "\
+(autoload (quote pprint-to-string) "pprint" "\
 Return a string containing the pretty-printed representation of OBJECT.
 OBJECT can be any Lisp object.  Quoting characters are used as needed
 to make output that `read' can handle, whenever this is possible.  The
@@ -110,7 +110,7 @@ given WIDTH.  WIDTH value defaults to `fill-column'.
 
 \(fn OBJECT &optional WIDTH)" nil nil)
 
-(autoload 'pprint "pprint" "\
+(autoload (quote pprint) "pprint" "\
 Output the pretty-printed representation of OBJECT, any Lisp object.
 Quoting characters are printed as needed to make output that `read'
 can handle, whenever this is possible.  Output stream is STREAM, or
@@ -120,7 +120,7 @@ value defaults to `fill-column'.
 
 \(fn OBJECT &optional STREAM WIDTH)" nil nil)
 
-(autoload 'pprint-function "pprint" "\
+(autoload (quote pprint-function) "pprint" "\
 See a pretty-printed representation of FUNCTION-NAME.
 
 \(fn FUNCTION-NAME)" t nil)
@@ -129,15 +129,13 @@ See a pretty-printed representation of FUNCTION-NAME.
 
 ;;;### (autoloads nil nil ("cedet-compat.el" "cedet-files.el" "cedet-load.el"
 ;;;;;;  "cedet.el" "ezimage.el" "mode-local.el" "sformat.el" "working.el")
-;;;;;;  (18828 35007 105341))
+;;;;;;  (18832 53085 756760))
 
 ;;;***
 
-(provide 'cedet-loaddefs)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; cedet-loaddefs.el ends here

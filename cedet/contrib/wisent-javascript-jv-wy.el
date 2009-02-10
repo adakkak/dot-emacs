@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2005 Joakim Verona, Eric Ludlam
 
-;; Author: Abdulmajed Dakkak <adakkak@cilin>
-;; Created: 2009-02-06 13:00:43-0600
+;; Author:  <adakkak@toxic>
+;; Created: 2009-02-09 18:52:08-0600
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
