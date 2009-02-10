@@ -13,6 +13,7 @@ Trailing slashes are stripped and duplicate names are not added."
 (add-to-load-path "~/.emacs.d/color-theme")
 (add-to-load-path "~/.emacs.d/rhtml")
 (add-to-load-path "~/.emacs.d/nxml")
+(add-to-load-path "~/.emacs.d/cc-mode")
 
 (autoload 'js2-mode "js2" nil t)
 
@@ -32,7 +33,9 @@ Trailing slashes are stripped and duplicate names are not added."
 (require 'color-theme)
 (require 'nxml-mode)
 (require 'rhtml-mode)
+(require 'cc-mode)
 
+(add-to-list 'auto-mode-alist '("\\.c$" . cc-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.textile\\'" . textile-mode))
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
