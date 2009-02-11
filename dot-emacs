@@ -117,7 +117,12 @@ Trailing slashes are stripped and duplicate names are not added."
 (setq gc-cons-threshold 50000000)
 
 (custom-set-variables
- '(load-home-init-file t t))
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(load-home-init-file t t)
+ '(menu-bar-mode t))
 
 (push "~/.emacs.d/distel/elisp/" load-path)
 (require 'distel)
@@ -157,7 +162,12 @@ Trailing slashes are stripped and duplicate names are not added."
 	    (dolist (spec distel-shell-keys)
 	      (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
 
-(custom-set-faces)
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
 (global-font-lock-mode 1)
 
 (add-to-list 'load-path "~/.emacs.d/plugins/yasnippet")
