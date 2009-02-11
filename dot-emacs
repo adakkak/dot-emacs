@@ -9,7 +9,6 @@ Trailing slashes are stripped and duplicate names are not added."
 
 (add-to-load-path "~/.emacs.d")
 (add-to-load-path "~/.emacs.d/emacs-rails")
-(add-to-load-path "~/.emacs.d/clojure-mode")
 (add-to-load-path "~/.emacs.d/color-theme")
 (add-to-load-path "~/.emacs.d/rhtml")
 (add-to-load-path "~/.emacs.d/nxml")
@@ -33,7 +32,7 @@ Trailing slashes are stripped and duplicate names are not added."
 (require 'color-theme)
 (require 'nxml-mode)
 (require 'rhtml-mode)
-(require 'cc-mode)
+;;(require 'cc-mode)
 
 (add-to-list 'auto-mode-alist '("\\.c$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
@@ -72,35 +71,17 @@ Trailing slashes are stripped and duplicate names are not added."
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
-;;; Clojure Mode
-(setq inferior-lisp-program
-      (let* ((java-path "java")               ; Path to java implementation
-             (java-options "")                ; Extra command-line options to java.
-             (clojure-path "~/usr/clojure/")  ; Base directory to Clojure.
-             (class-path-delimiter ";")       ; The character between  elements of your classpath.
-             (class-path (mapconcat (lambda (s) s)
-                                    (list (concat clojure-path "clojure-lang-1.0-SNAPSHOT.jar"))
-                                    class-path-delimiter)))
-        (concat java-path
-                " " java-options
-                " -cp " class-path
-                " clojure.lang.Repl")))
-
 ;; Require clojure-mode to load and associate it to all .clj files.
 (setq load-path (cons "~/opt/clojure-mode" load-path))
 (require 'clojure-mode)
 (setq auto-mode-alist
       (cons '("\\.clj$" . clojure-mode)
             auto-mode-alist))
-
-;; These are extra key defines because I kept typing them.
-;; Within clojure-mode, have Ctrl-x Ctrl-e evaluate the last
-;; expression.
-;; Ctrl-c Ctrl-e is also there, because I kept typoing it.
-(add-hook 'clojure-mode-hook
-          '(lambda ()
-             (define-key clojure-mode-map "\C-c\C-e" 'lisp-eval-last-sexp)
-             (define-key clojure-mode-map "\C-x\C-e" 'lisp-eval-last-sexp)))
+(setq load-path (cons "~/opt/swank-clojure" load-path))
+(require 'swank-clojure-autoload)       
+       (swank-clojure-config
+	          (setq swank-clojure-jar-path "~/usr/clojure/clojure.jar")
+		  (setq swank-clojure-extra-classpaths (list "~/usr/clojure-contrib/clojure-contrib.jar")))
 
 (autoload 'run-ruby "inf-ruby"
   "Run an inferior Ruby process")
